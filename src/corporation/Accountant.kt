@@ -28,23 +28,22 @@ class Accountant (
         print("Enter the product price: ")
         val productPrice = readln().toInt()
 
-        when(productType) {
-            0 -> {print("Enter the product callories: ")
+        val card = when(productType) {
+            0 -> {
+                print("Enter the product callories: ")
                 val productCallories = readln().toInt()
-                val foodCard = FoodCard(name = productName, brand = productBrand, price = productPrice, calories = productCallories)
-                foodCard.printInfo()
+                FoodCard(name = productName, brand = productBrand, price = productPrice, calories = productCallories)
             }
             1 -> {print("Enter the product wattage: ")
                 val productWattage = readln().toInt()
-                val applianceCard = AppliancesCard(name = productName, brand = productBrand, price = productPrice, wattage = productWattage)
-                applianceCard.printInfo()
+                AppliancesCard(name = productName, brand = productBrand, price = productPrice, wattage = productWattage)
             }
-            2 -> {print("Enter the product size: ")
+            else -> {print("Enter the product size: ")
                 val productSize = readln().toFloat()
-                val shoesCard = ShoesCard(name = productName, brand = productBrand, price = productPrice, size  = productSize)
-                shoesCard.printInfo()
+                ShoesCard(name = productName, brand = productBrand, price = productPrice, size  = productSize)
             }
         }
+        card.printInfo()
 
     }
 }
