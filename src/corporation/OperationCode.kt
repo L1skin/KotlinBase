@@ -1,5 +1,5 @@
 package corporation
 
 enum class OperationCode(val title: String) {
-     EXIT(title = "exit"), REGISTER_NEW_ITEM(title = "register new item")
+     EXIT(title = "Exit"), REGISTER_NEW_ITEM(title = "Register new item"), SHOW_ALL_ITEMS(title = "Show all items")
 }
