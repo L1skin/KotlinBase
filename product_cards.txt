@@ -1,2 +1,2 @@
 Chips%Lays%200%400%FOOD
-Sneakers%Nile%3000%44.0%SHOE
+Sneakers%Nike%3000%44.0%SHOE
