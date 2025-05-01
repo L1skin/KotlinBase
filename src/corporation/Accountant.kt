@@ -3,24 +3,21 @@ package corporation
 import java.io.File
 
 class Accountant (
+    id: Int,
     name: String,
     age: Int = 0
-): Worker(name = name, age = age) {
+): Worker(id = id, name = name, age = age, employePosition = EmployeePosition.ACCOUNTANT) {
 
     val file = File("product_cards.txt")
+    val employeFile = File("employees.txt")
 
     override fun work() {
         while(true) {
-            print("Enter the operation code. ")
+            println("Enter the operation code.")
             val operationCodes = OperationCode.entries
 
             for ((index, code) in operationCodes.withIndex()) {
-                print("$index - ${code.title}")
-                if (index < operationCodes.size - 1) {
-                    print(", ")
-                } else {
-                    print(": ")
-                }
+                println("$index - ${code.title}")
             }
 
             val operationIndex = readln().toInt()
@@ -31,8 +28,78 @@ class Accountant (
                 OperationCode.REGISTER_NEW_ITEM -> registerNewItem()
                 OperationCode.SHOW_ALL_ITEMS -> showAllItems()
                 OperationCode.REMOVE_PRODUCT_CARD -> removeProductCard()
+                OperationCode.REGISTER_NEW_EMPLOYEE -> registerNewEmployee()
+                OperationCode.FIRE_AN_EMPLOYEE -> fireAnEmployee()
+                OperationCode.SHOW_ALL_EMLOYEES -> showAllEmployees()
             }
         }
+    }
+
+
+    fun registerNewEmployee() {
+
+        val employeePositions = EmployeePosition.entries
+
+        print("Choose position. ")
+        for ((index, position) in employeePositions.withIndex()) {
+            print("$index - ${position.title}")
+            if (index < employeePositions.size - 1) {
+                print(", ")
+            } else {
+                print(": ")
+            }
+        }
+
+        val employeePositionIndex = readln().toInt()
+        val employeePosition = employeePositions[employeePositionIndex]
+
+        print("Enter id: ")
+        val id = readln().toInt()
+//        Добавить проверку уникальности айди
+        print("Enter name: ")
+        val name = readln()
+        print("Enter age: ")
+        val age = readln().toInt()
+
+        val employee = when(employeePosition) {
+            EmployeePosition.DIRECTOR -> {
+                Director(id, name, age)
+            }
+            EmployeePosition.ACCOUNTANT -> {
+                Accountant(id, name, age)
+            }
+            EmployeePosition.ASSISTANT -> {
+                Assistant(id, name, age)
+            }
+            EmployeePosition.CONSULTANT -> {
+                Consultant(id, name, age)
+            }
+        }
+        saveEmployeeFile(employee)
+    }
+
+    fun saveEmployeeFile(employee: Worker){
+        employeFile.appendText("${employee.id}%${employee.name}%${employee.age}%${employee.employePosition}\n")
+    }
+
+    fun fireAnEmployee() {
+        val employeesList = listOf(employeFile.readText().split("\n"))
+        if (employeesList.isEmpty()) {
+            println("Nothing to fire")
+            return
+        }
+        print("Enter employee id to fire: ")
+        val employeeIDtoFire = readln().toInt()
+
+        for (item in employeesList) {
+            val employee = listOf(item)
+        }
+
+
+    }
+
+    fun showAllEmployees() {
+
     }
 
     fun removeProductCard(){

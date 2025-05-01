@@ -1,9 +1,10 @@
 package corporation
 
 class Assistant (
+    id: Int,
     name: String,
     age: Int = 0
-): Worker(name = name, age = age) {
+): Worker(id = id, name = name, age = age, employePosition = EmployeePosition.ASSISTANT) {
 
     fun bringCoffee(count: Int = 1, drink: String = "Cappuccino"): String {
         repeat(count) {
